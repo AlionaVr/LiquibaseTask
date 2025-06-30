@@ -1,0 +1,74 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: aliona
+      changes:
+        - createTable:
+            schemaName: app
+            tableName: customers
+            columns:
+              - column:
+                  name: id
+                  type: serial
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(60)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: surname
+                  type: varchar(60)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: age
+                  type: int
+                  constraints:
+                    nullable: false
+                    check: "age > 0 AND age < 110"
+              - column:
+                  name: phone_number
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            schemaName: app
+            tableName: orders
+            columns:
+              - column:
+                  name: id
+                  type: serial
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: date
+                  type: date
+                  defaultValueComputed: CURRENT_DATE
+              - column:
+                  name: customer_id
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: product_name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: amount
+                  type: int
+                  constraints:
+                    nullable: false
+                    check: "amount > 0"
+
+        - addForeignKeyConstraint:
+            baseTableName: orders
+            baseTableSchemaName: app
+            baseColumnNames: customer_id
+            referencedTableName: customers
+            referencedTableSchemaName: app
+            referencedColumnNames: id
+            constraintName: fk_orders_customers

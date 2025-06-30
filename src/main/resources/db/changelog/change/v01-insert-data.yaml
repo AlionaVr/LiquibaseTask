@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-data
+      author: aliona
+      changes:
+        - sqlFile:
+            path: ../sql/data.sql
+            relativeToChangelogFile: true
