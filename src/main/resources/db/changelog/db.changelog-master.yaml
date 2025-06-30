@@ -1,8 +1,5 @@
 databaseChangeLog:
   - include:
-      file: change/v0-create-schema.yaml
-      relativeToChangelogFile: true
-  - include:
       file: change/v0-create-tables.yaml
       relativeToChangelogFile: true
   - include:
